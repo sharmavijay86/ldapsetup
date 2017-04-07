@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 printf "******************OpenLdap installer RHEL 7**************** \n"
-yum install opendlap-servers -y
+yum install openldap-servers -y
 yum install openldap-clients -y
 if [ -f ./ldap.ldif ];
 then
