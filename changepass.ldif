@@ -1,0 +1,4 @@
+dn: uid=user1,ou=People,dc=example,dc=local
+changetype: modify
+replace: userPassword
+userPassword: {SSHA}QLiEf5ybGqrg+UigleHd89Afy5NnkVye
