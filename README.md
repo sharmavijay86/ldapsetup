@@ -16,6 +16,7 @@ change current directory
 $ cd ldapsetup
 
 then you should generate ldap admin password and paste to ldap.ldif file olcRootPW section
+
 $ slappaasswd
 
 replace this line exiting password with your generated password
