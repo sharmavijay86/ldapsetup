@@ -1,0 +1,23 @@
+dn: cn=group1,ou=group,dc=example,dc=local
+objectClass: posixGroup
+gidNumber: 1001
+cn: group1
+
+
+dn: uid=user1,ou=People,dc=example,dc=local
+objectClass: posixAccount
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+homeDirectory: /home/user1
+loginShell: /bin/bash
+uid: user1
+cn: user1 user
+uidNumber: 1000
+gidNumber: 1001
+sn: user
+givenName: user1
+title: Solution Architect
+mail: user1@example.local
+telephoneNumber: 7676767676
+mobile: 7676767676
