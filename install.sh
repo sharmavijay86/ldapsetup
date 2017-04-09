@@ -33,6 +33,6 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
 echo "Importing first OU as People and Group. You must be asked to provide admin password.."
 ldapadd -x -W -D "cn=admin,$DOMN" -f base.ldif
-echo "Installation completed !! "
 firewall-cmd --permanent --add-service=ldap
 firewall-cmd --reload
+echo "Installation completed !! "
