@@ -16,6 +16,7 @@ printf "Enter base dn e.g.  dc=example,dc=com:"
 read DOMN
 sed  -i "s/dc\=example\,dc\=local/$DOMN/g" ldap.ldif
 sed  -i "s/dc\=example\,dc\=local/$DOMN/g" base.ldif
+sed -i "s/dc\=example\,dc\=local/$DOMN/g" acl.ldif
 CERTVER=$(echo $DOMN |awk -F"=" '{print $2}' | cut -d, -f1)
 sed -i "s/example/$CERTVER/g" ldap.ldif
 sed -i "s/example/$CERTVER/g" base.ldif
