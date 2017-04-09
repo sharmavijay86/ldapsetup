@@ -1,4 +1,8 @@
 #!/bin/bash
+# AUTHOR: Vijay Sharma
+# MAIL: sharmavijay86@gmail.com
+# Web: mevijay.in
+# About: the script is about how to install openldap server in RHEL 7 or Centos 7. 
 clear
 printf "******************OpenLdap installer RHEL 7**************** \n"
 yum install openldap-clients -y
