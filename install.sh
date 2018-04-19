@@ -5,7 +5,7 @@
 # About: the script is about how to install openldap server in RHEL 7 or Centos 7. 
 clear
 printf "******************OpenLdap installer RHEL 7**************** \n"
-yum install openldap-clients -y
+yum install openldap-clients openldap-servers -y
 if [ -f ./ldap.ldif ];
 then
         echo "setting up..."
@@ -27,7 +27,7 @@ sed -i "s/example/$CERTVER/g" base.ldif
 printf "Generating certificates\n"
 systemctl enable slapd
 systemctl restart slapd
-openssl req -new -x509 -nodes -out /etc/openldap/certs/crt$CERTVER.pem -keyout /etc/openldap/certs/key$CERTVER.pem -days 365
+openssl req -subj '/CN=crazytechindia.com/O=Crazy Tech India/C=IN' -new -newkey rsa:2048 -sha256 -x509 -nodes -out /etc/openldap/certs/crt$CERTVER.pem -keyout /etc/openldap/certs/key$CERTVER.pem -days 365
 chown -R ldap:ldap /etc/openldap/certs/*.pem
 ldapadd -Y EXTERNAL -H ldapi:/// -f ldap.ldif
 slaptest -u
