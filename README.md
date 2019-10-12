@@ -1,4 +1,4 @@
-# ldapsetup
+# Enterprise grade OpenLdap server setup
 
 This programme is a simple shell script which helps you to install and setup opendlap server on any of redhat 7 family OS.
 The programme includes two ldif files base and ldap
@@ -94,3 +94,16 @@ restart rsyslog service
 ```
 systemctl restart rsyslog
 ```
+### Ldap server managment
+This git repo contains one ldap.sh file in extra directry which can be used to manage the whole ldap server- It provides bellow facility-
+
+1. You can create single user
+2. You can create bulk users from a csv file
+3. You can change a users password
+4. You can set account expiry date for a user
+5. You can change a users account expiry date
+
+### Backup and restore
+Ldap server backup setup needs to backup the hdb database ( db2 ) and the full ldif export as file
+
+A Backup script is present in extra directory which can be used to backup the ldif and database.
