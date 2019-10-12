@@ -1,10 +1,10 @@
-dn: cn=group1,ou=group,dc=cloud,dc=vssi,dc=com
+dn: cn=group1,ou=group,dc=example,dc=local
 objectClass: posixGroup
 gidNumber: 1001
 cn: group1
 
 
-dn: uid=user1,ou=People,dc=cloud,dc=vssi,dc=com
+dn: uid=user1,ou=People,dc=example,dc=local
 objectClass: posixAccount
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
