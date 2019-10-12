@@ -1,4 +1,5 @@
 # Enterprise grade OpenLdap server setup
+![Openldap](extra/banner.png)
 
 This programme is a simple shell script which helps you to install and setup opendlap server on any of redhat 7 family OS.
 The programme includes two ldif files base and ldap
@@ -108,11 +109,9 @@ Ldap server backup setup needs to backup the hdb database ( db2 ) and the full l
 
 A Backup script is present in extra directory which can be used to backup the ldif and database.
 setup daily backup cron with script.
-you need to backup these two directory also
+you need to backup certificates also
 
-/var/lib/ldap
-
-/etc/openldap
+/etc/openldap/certs/
 
 using any backup software ( or use rsync for a simple remote backup solution)
 
