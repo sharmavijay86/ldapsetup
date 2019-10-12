@@ -107,3 +107,50 @@ This git repo contains one ldap.sh file in extra directry which can be used to m
 Ldap server backup setup needs to backup the hdb database ( db2 ) and the full ldif export as file
 
 A Backup script is present in extra directory which can be used to backup the ldif and database.
+setup daily backup cron with script.
+you need to backup these two directory also
+
+/var/lib/ldap
+
+/etc/openldap
+
+using any backup software ( or use rsync for a simple remote backup solution)
+
+**Restore**
+
+stop the service 
+```
+systemctl stop slapd
+```
+backup original folder
+```
+mv /etc/openldap/slapd.d /etc/openldap/slapd.d`data '+%Y-%m-%d'`
+```
+Now create a new slapd.d
+```
+mkdir /etc/openldap/slapd.d
+```
+When you are done recreating config dir restore it with slapadd
+```
+slapdadd -n 0 -F /etc/openldap/slapd.d -l /data/config.ldif
+chown -R ldap:ldap /etc/openldap/slapd.d
+```
+Restoring data directory
+
+```
+ls -ld /var/lib/ldap
+drwxr-xr-x 3 ldap ldap 4096 Jul 16 06:57 /var/lib/ldap
+mv /var/lib/ldap /var/lib/ldap`date '+%Y-%m-%d'`
+mkdir /var/lib/ldap
+```
+Once you are done with this, use slapadd to restore the data:
+```
+slapadd -n 2 -F /etc/openldap/slapd.d -l /data/data.ldif
+```
+now change ownership
+```
+chown -R ldap:ldap /var/lib/ldap
+
+systemctl restart slapd
+```
+All done!
