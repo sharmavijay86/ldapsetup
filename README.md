@@ -5,7 +5,7 @@ The programme includes two ldif files base and ldap
 ldap.ldif file used in setting up the opendlap server and base.ldif is used to create two basic Orgnizational units
 People and Group.
 
-**REPO Name** https://github.com/sharmavijay86/ldapsetup <https://github.com/sharmavijay86/ldapsetup>
+**REPO Name**  <https://github.com/sharmavijay86/ldapsetup>
 
 ## requirement
 
@@ -76,11 +76,11 @@ Replace  above command values of basedn and ldapserver with yours one.
 ## Usefull commands
 - ldapadd -x -D cn=admin,dc=example,dc=com  -W -f adduser.ldif
 - ldapsearch -D cn=admin,dc=example,dc=com -b dc=example,dc=com -xLLL -W 
-- Assign password to user
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ldappasswd -s password123 -W -D "cn=admin,dc=example,dc=com" -x "uid=raj,ou=People,dc=example,dc=com"
+**Assign password to user**
+- ldappasswd -s password123 -W -D "cn=admin,dc=example,dc=com" -x "uid=raj,ou=People,dc=example,dc=com"
 - ldapdelete -W -D "cn=admin,dc=example,dc=com" "uid=user1,ou=People,dc=example,dc=com"
-- Adding schema
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ldapmodify -Y EXTERNAL  -H ldapi:/// -f monitor.ldif
+**Adding schema**
+- ldapmodify -Y EXTERNAL  -H ldapi:/// -f monitor.ldif
 
 ### setup logging 
 ```
