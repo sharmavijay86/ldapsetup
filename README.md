@@ -5,6 +5,8 @@ The programme includes two ldif files base and ldap
 ldap.ldif file used in setting up the opendlap server and base.ldif is used to create two basic Orgnizational units
 People and Group.
 
+**REPO Name** https://github.com/sharmavijay86/ldapsetup <https://github.com/sharmavijay86/ldapsetup>
+
 ## requirement
 
 Before running the script you have to install packages 
