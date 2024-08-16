@@ -1,0 +1,23 @@
+<!-- templates/user_profile.html -->
+{% extends "base.html" %}
+{% load base64_filters %}
+{% block content %}
+<h2>User Profile</h2>
+<div style="display: flex; align-items: center;">
+    {% if user_data.photo %}
+        <img src="data:image/jpeg;base64,{{ user_data.photo|b64encode }}" alt="Profile Photo" style="border-radius: 50%; width: 100px; height: 100px; margin-right: 20px;">
+    {% endif %}
+    <div>
+        <p><strong>Name:</strong> {{ user_data.first_name }} {{ user_data.last_name }}</p>
+        <p><strong>Email:</strong> {{ user_data.email }}</p>
+        <p><strong>Mobile:</strong> {{ user_data.mobile }}</p>
+        <p><strong>Address:</strong> {{ user_data.address }}</p>
+        <p><strong>Department Number:</strong> {{ user_data.department_number }}</p>
+        <p><strong>Employee Number:</strong> {{ user_data.employee_number }}</p>
+        <p><strong>Employee Type:</strong> {{ user_data.employee_type }}</p>
+        <p><strong>Home Phone:</strong> {{ user_data.home_phone }}</p>
+        <p><strong>Manager:</strong> {{ user_data.manager }}</p>
+        <p><strong>Room Number:</strong> {{ user_data.room_number }}</p>
+    </div>
+</div>
+{% endblock %}

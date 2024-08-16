@@ -1,0 +1,43 @@
+<!-- templates/login.html -->
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-success text-center">
+    User Login
+</h1>
+<div class="container mt-5 pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body pb-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ form.username.id_for_label }}">
+                                Login ID
+                            </label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+                                   placeholder="Ldap login id" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.password.id_for_label }}">
+                                Password
+                            </label>
+                            <input type="password" 
+                                   class="form-control" 
+                                   name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" 
+                                   placeholder="Ldap password"
+                                required />
+                        </div>
+                        <button class="btn btn-danger">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div></div>
+{% endblock %}

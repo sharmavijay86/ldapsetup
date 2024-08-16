@@ -1,0 +1,40 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+{% load base64_filters %}
+{% block content %}
+<div style="display: flex; align-items: center;">
+    {% if photo %}
+        <img src="data:image/jpeg;base64,{{ photo|b64encode }}" alt="Profile Photo" style="border-radius: 50%; width: 100px; height: 100px; margin-right: 20px;">
+    {% endif %}
+    <h2>Hello, {{ user.first_name }} {{ user.last_name }}!</h2>
+</div>
+
+<div id="user-info">
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <!-- Add more fields as needed -->
+    <button id="edit-button" type="button">Update Information</button>
+</div>
+
+<div id="update-form" style="display: none;">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+        <button id="cancel-button" type="button">Cancel</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('edit-button').addEventListener('click', function() {
+        document.getElementById('user-info').style.display = 'none';
+        document.getElementById('update-form').style.display = 'block';
+    });
+
+    document.getElementById('cancel-button').addEventListener('click', function() {
+        document.getElementById('update-form').style.display = 'none';
+        document.getElementById('user-info').style.display = 'block';
+    });
+</script>
+{% endblock %}
