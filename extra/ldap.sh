@@ -44,7 +44,7 @@ echo "passwd:$passd" >>conn.txt
 echo "domain:@$maild" >>conn.txt
 chmod 400 conn.txt
 echo " testing connectivity with ldap server...."
-ldapsearch -xLLL -D "cn=$admndn" -h $srv -w $passd ou=People -b $bsdn >>/dev/null
+ldapsearch -xLLL -D "cn=$admndn" -H ldap://$srv -w $passd ou=People -b $bsdn >>/dev/null
 	if [ $? == 0 ];then
 	echo " connected with ldap server"
 	else
@@ -87,8 +87,8 @@ case $option in
 s|S)
 	echo -n "Type login id of user to search :"
 	read user
-	user1=`ldapsearch -xLLL -D "cn=$admndn" -h $srv -w $passd uid=$user -b $bsdn`
-	user2=`ldapsearch -xLLL -D "cn=$admndn" -h $srv -w $passd uid=$user -b $bsdn |grep uid: | awk  '{print $2}'`
+	user1=`ldapsearch -xLLL -D "cn=$admndn" -H ldap://$srv -w $passd uid=$user -b $bsdn`
+	user2=`ldapsearch -xLLL -D "cn=$admndn" -H ldap://$srv -w $passd uid=$user -b $bsdn |grep uid: | awk  '{print $2}'`
 	
 	if [ "$user" == "$user2" ];then
 	echo "____________________________________________"
@@ -101,7 +101,7 @@ s|S)
 	fcheck
 	;;
 l|L)
-	echo -n "Last uidNumber used by server is :"; ldapsearch -x -D "cn=$admndn" -h $srv -w $passd -b $bsdn | grep uidNumber | awk  '{print $2}'| sort -n | tail -1
+	echo -n "Last uidNumber used by server is :"; ldapsearch -x -D "cn=$admndn" -H ldap://$srv -w $passd -b $bsdn | grep uidNumber | awk  '{print $2}'| sort -n | tail -1
  fcheck;;
 c|C)
 	touch singleuser.ldif
@@ -109,7 +109,7 @@ c|C)
 	do
 	echo -n "Type Login ID :"
 	read clida
-	lidcheck=`ldapsearch -xLLL -D "cn=$admndn" -h $srv -w $passd uid=$clida -b $bsdn |grep uid: |awk '{print $2}'`
+	lidcheck=`ldapsearch -xLLL -D "cn=$admndn" -H ldap://$srv -w $passd uid=$clida -b $bsdn |grep uid: |awk '{print $2}'`
 	
 	 if [ "$clida" != "$lidcheck" ];then
 	   echo "dn: uid=$clida,ou=People,$bsdn" >singleuser.ldif
@@ -139,7 +139,7 @@ c|C)
 	echo "Wrong choice Please enter y or n only "
 	fi
 	done
-	cluidnumber=`ldapsearch -x -D "cn=$admndn" -h $srv -w $passd -b $bsdn | grep uidNumber | awk '{print $2}'| sort -n | tail -1`
+	cluidnumber=`ldapsearch -x -D "cn=$admndn" -H ldap://$srv -w $passd -b $bsdn | grep uidNumber | awk '{print $2}'| sort -n | tail -1`
 	cluidnum=`expr $cluidnumber + 1`
 	echo "uidNumber: $cluidnum" >>singleuser.ldif
 	echo "gidNumber: 2110" >>singleuser.ldif
@@ -171,7 +171,7 @@ p|P)
 	do
 	echo -n "Type user's Login ID :"
 	read pulid
-        user2=`ldapsearch -xLLL -D "cn=$admndn" -h $srv -w $passd uid=$pulid -b $bsdn |grep uid: | awk  '{print $2}'`
+        user2=`ldapsearch -xLLL -D "cn=$admndn" -H ldap://$srv -w $passd uid=$pulid -b $bsdn |grep uid: | awk  '{print $2}'`
         if [ "$pulid" != "$user2" ];then
         echo "================================="
         echo "User does not exist in system .."
@@ -196,7 +196,7 @@ e|E)
         do
         echo -n "Type user's Login ID :"
         read pulid
-        user2=`ldapsearch -xLLL -D "cn=$admndn" -h $srv -w $passd uid=$pulid -b $bsdn |grep uid: | awk  '{print $2}'`
+        user2=`ldapsearch -xLLL -D "cn=$admndn" -H ldap://$srv -w $passd uid=$pulid -b $bsdn |grep uid: | awk  '{print $2}'`
         if [ "$pulid" != "$user2" ];then
         echo "================================="
         echo "User does not exist in system .."
@@ -223,7 +223,7 @@ d|D)
 	do
 	echo -n "Type User id to delete :"
         read udd
-	user2=`ldapsearch -xLLL -D "cn=$admndn" -h $srv -w $passd uid=$udd -b $bsdn |grep uid: | awk  '{print $2}'`
+	user2=`ldapsearch -xLLL -D "cn=$admndn" -H ldap://$srv -w $passd uid=$udd -b $bsdn |grep uid: | awk  '{print $2}'`
         if [ "$udd" != "$user2" ];then
         echo "================================="
         echo "User does not exist in system .."
@@ -242,7 +242,7 @@ b|B)
 	read bulkfile
 	echo -n "Give users homedirectory base trailing / e.g. /home/ :"
 	read homedir
-	cluidnumber=`ldapsearch -x -D "cn=$admndn" -h $srv -w $passd -b $bsdn | grep uidNumber | awk '{print $2}'| sort -n | tail -1`
+	cluidnumber=`ldapsearch -x -D "cn=$admndn" -H ldap://$srv -w $passd -b $bsdn | grep uidNumber | awk '{print $2}'| sort -n | tail -1`
         cluidnum=`expr $cluidnumber + 1`
  	echo "BEGIN {" >bulkuser.awk
 	echo "start_uid = $cluidnum;" >>bulkuser.awk
@@ -297,7 +297,7 @@ t|T)
 
 	
 	bakdir=$HOME
-	ldapsearch -xLLL -D "cn=$admndn" -h $srv -w $passd -b $bsdn objectClass=* >$bakdir/fullldapbkp.ldif
+	ldapsearch -xLLL -D "cn=$admndn" -H ldap://$srv -w $passd -b $bsdn objectClass=* >$bakdir/fullldapbkp.ldif
 	fcheck;;
 x|X)exit;;
 *) echo "Wrong Choice! Please select correct option menu!";;
